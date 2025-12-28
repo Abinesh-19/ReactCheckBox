@@ -16,7 +16,10 @@ function Component2({
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [showUp, setShowUp] = useState(false);
   const selectAllRef = useRef(null);
-  const StateRef = useRef(null);
+
+  const currentSelectChecked = checkedList.filter((values) =>
+    selectedDistrict.find((item) => item.DistrictName === values)
+  );
 
   useEffect(() => {
     if (selectAllRef.current) {
@@ -24,10 +27,7 @@ function Component2({
         currentSelectChecked.length > 0 &&
         currentSelectChecked.length < selectedDistrict.length;
     }
-  }, [checkedList, selectedDistrict]);
-  const currentSelectChecked = checkedList.filter((values) =>
-    selectedDistrict.find((item) => item.DistrictName === values)
-  );
+  }, [currentSelectChecked.length, selectedDistrict.length]);
 
   const handleSelectDistrict = (e) => {
     const value = e.target.value;
